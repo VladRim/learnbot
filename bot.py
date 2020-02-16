@@ -4,9 +4,6 @@ import logging
 import settings
 
 
-PROXY = {'proxy_url': 'socks5://t1.learn.python.ru:1080',
-         'urllib3_proxy_kwargs': {'username': 'learn', 'password': 'python'}}
-
 logging.basicConfig(format='%(asctime)s - %(levelname)s - %(message)s',
                     level=logging.INFO,
                     filename='bot.log')
