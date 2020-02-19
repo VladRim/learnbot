@@ -1,5 +1,4 @@
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
-from urllib3.contrib.socks import SOCKSProxyManager
 import logging
 import settings
 import ephem
@@ -14,6 +13,7 @@ def greet_user(bot, update):
     print(text)
     update.message.reply_text(text)
 
+
 def talk_to_me(bot, update):
     user_text = "Привет! {} Ты написал: {}".format(update.message.chat.first_name, update.message.text)
     logging.info("User: %s, Chat id: %s, Message: %s", update.message.chat.username,
@@ -21,16 +21,15 @@ def talk_to_me(bot, update):
     update.message.reply_text(user_text)
 
 
-
-if __name__ == "__main__":
-    mybot = Updater(settings.APY_KEY, request_kwargs=settings.PROXY)
-
+def main():
+    mybot = Updater(settings.API_KEY, request_kwargs=settings.PROXY)
     logging.info('Бот запущен')
-
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
-
     mybot.start_polling()
     mybot.idle()
 
+
+if __name__ == "__main__":
+    main()
